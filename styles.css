@@ -1,0 +1,61 @@
+* {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --page-bg-colour: #fff;
+    --page-text-colour: #000;
+    --toolbar-bg-color: #eee;
+    --toolbar-border-colour: #000;
+    --button-bg-colour: #eee;
+    --button-bg-colour-hover: #ddd;
+    --button-border-colour: #444;
+    --button-shadow-colour: rgba(151, 151, 151, 0.6);
+}
+
+.pad-left-md {
+    padding-left: 1rem;
+}
+
+body {
+    background-color: var(--page-bg-colour);
+    color: var(--page-text-colour);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+}
+
+#toolbar__container {
+    background-color: var(--toolbar-bg-color);
+    border-top: 1px solid var(--button-border-colour);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100vw;
+    height: 5rem;
+    position: fixed;
+    bottom: 0;
+}
+
+#canvas {
+    background-color: #fff;
+    width: 100vw;
+}
+
+.toolbar__button {
+    font-size: 2rem;
+    text-shadow: 2px 4px 4px var(--button-shadow-colour);
+    background-color: var(--button-bg-color);
+    border: 1px solid var(--button-border-colour);
+    border-radius: 5px;
+    color: #000;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+.toolbar__button:hover {
+    background-color: var(--button-bg-colour-hover);
+}
