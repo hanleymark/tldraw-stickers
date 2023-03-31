@@ -65,9 +65,17 @@ body {
     background-color: var(--button-bg-colour-hover);
 }
 
-.stamp__element--moving {
+[class^="stamp__element"] {
     position: absolute;
     font-size: 2rem;
     text-shadow: 2px 4px 4px var(--button-shadow-colour);
+    user-select: none;
+}
+
+.stamp__element--moving {
     z-index: 99;
+}
+
+.stamp__element--dropped {
+    z-index: auto;
 }
