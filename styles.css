@@ -69,4 +69,5 @@ body {
     position: absolute;
     font-size: 2rem;
     text-shadow: 2px 4px 4px var(--button-shadow-colour);
+    z-index: 99;
 }
