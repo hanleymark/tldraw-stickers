@@ -34,14 +34,23 @@ export class StampButton {
 
   // Get the stamp element and position it at the mouse click coordinates.
   stampButtonClick = (event) => {
-    const stampElement = this.getStampElement();
-    const stampPosition = this.getStampPosition(event, stampElement);
-    stampElement.style.left = `${stampPosition.x}px`;
-    stampElement.style.top = `${stampPosition.y}px`;
-    this.canvas.appendChild(stampElement);
+    // Get reference to any existing dragging stamp element and remove it
+    const oldStampElement = this.canvas.querySelector(".stamp__element--moving");
+    if (oldStampElement) {
+      oldStampElement.remove();
+    }
+
+    // Create new draggable stamp element and position it at mouse click coordinates
+    // with an offset of half the stamp element's width and height.
+    const stampDragElement = this.getStampElement();
+    const stampPosition = this.getStampPosition(event, stampDragElement);
+    stampDragElement.style.left = `${stampPosition.x}px`;
+    stampDragElement.style.top = `${stampPosition.y}px`;
+    this.canvas.appendChild(stampDragElement);
   };
 
-  // Get the stamp element and position it at the mouse coordinates with an offset of half the stamp element's width and height.
+  // Get the stamp element and position it at the mouse coordinates
+  // with an offset of half the stamp element's width and height.
   startDrag = (event) => {
     const stampElement = this.canvas.querySelector(".stamp__element--moving");
     if (stampElement) {
@@ -55,8 +64,10 @@ export class StampButton {
   stopDrag = (event) => {
     const stampElement = this.canvas.querySelector(".stamp__element--moving");
     if (stampElement) {
-      stampElement.classList.remove("stamp__element--moving");
-      stampElement.classList.add("stamp__element--dropped");
+      const droppedStamp = stampElement.cloneNode(true);
+      droppedStamp.classList.remove("stamp__element--moving");
+      droppedStamp.classList.add("stamp__element--dropped");
+      this.canvas.appendChild(droppedStamp);
     }
   };
 
