@@ -3,16 +3,16 @@ import { EmojiPicker } from "./modules/emoji-picker.js";
 
 const toolbarContainer = document.querySelector("#toolbar__container");
 const canvas = document.querySelector("#canvas");
+const bodyElement = document.querySelector("body");
 
 const stampItems = ["🌟", "🔥", "💖", "👍", "👎"];
 
 setUpStampButtons(stampItems);
+setUpAddCustomStampButton();
 
 setUpDisplayCircleOnMouseClick();
 
 const emojiPicker = new EmojiPicker();
-console.log(emojiPicker.allEmojis);
-
 
 // Create stamp buttons one for each object in stampItems array
 function setUpStampButtons(stampItems) {
@@ -51,4 +51,19 @@ function setUpDisplayCircleOnMouseClick() {
       mouseCircle.remove();
     }
   });
+}
+
+// Add custom stamp button
+function setUpAddCustomStampButton() {
+  const addCustomStampButton = document.createElement("button");
+  addCustomStampButton.id = "add-custom-stamp-button";
+  addCustomStampButton.classList.add("toolbar__button--add-custom-stamp");
+  addCustomStampButton.innerText = "+";
+
+  addCustomStampButton.addEventListener("mousedown", () => {
+    console.log("Add custom stamp button clicked");
+    bodyElement.appendChild(emojiPicker.getPickerElement());
+  });
+
+  toolbarContainer.appendChild(addCustomStampButton);
 }

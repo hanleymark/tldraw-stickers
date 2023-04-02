@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500&display=swap');
+
+/* 
+this.element = document.createElement("div");
+    this.element.classList.add("emoji-picker");
+    
+    const emojiPickerHeader = document.createElement("div");
+    emojiPickerHeader.classList.add("emoji-picker__header");
+    this.element.appendChild(emojiPickerHeader);
+
+    const emojiPickerHeaderTitle = document.createElement("h2");
+    emojiPickerHeaderTitle.classList.add("emoji-picker__header-title");
+    emojiPickerHeaderTitle.innerText = "Emoji Picker";
+    emojiPickerHeader.appendChild(emojiPickerHeaderTitle);
+
+    const emojiPickerBody = document.createElement("div");
+    emojiPickerBody.classList.add("emoji-picker__body");
+
+    for (let category in this.categories) {
+        const emojiPickerBodyCategory = document.createElement("section");
+        const emojiPickerBodyCategoryTitle = document.createElement("h3");
+        emojiPickerBodyCategoryTitle.classList.add("emoji-picker__body--category-title");
+        emojiPickerBodyCategoryTitle.innerText = this.categories[category];
+        emojiPickerBodyCategory.appendChild(emojiPickerBodyCategoryTitle);
+
+        emojiPickerBodyCategory.classList.add("emoji-picker__body--category");
+
+        for (let emojiObject of this.allEmojis.filter(emoji => emoji.category === this.categories[category])) {
+            const emojiPickerButton = document.createElement("button");
+            emojiPickerButton.classList.add("emoji-picker__body--button");
+*/
+
+.emoji-picker {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 400;
+    position: fixed;
+    display: flexbox;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    height: 50vh;
+    background-color: #fff;
+    z-index: 999;
+}
+
+.emoji-picker__header {
+    display: flexbox;
+    justify-content: center;
+    font-weight: 500;
+    width: 100%;
+    height: 2rem;
+    background-color: #fff;
+}
+
+.emoji-picker__header-title {
+    font-size: 1rem;;
+    font-weight: 500;
+}
+
+.emoji-picker__body {
+    display: flexbox;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #fff;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.emoji-picker__body--category {
+    display: flexbox;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    background-color: #fff;
+}
+
+.emoji-picker__body--category-title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+.emoji-picker__body--button {
+    font-size: 1.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 10%;
+    background-color: #fff;
+}
