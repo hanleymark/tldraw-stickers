@@ -12,7 +12,7 @@
     --button-bg-colour: #eee;
     --button-bg-colour-hover: #ddd;
     --button-border-colour: #444;
-    --button-shadow-colour: rgba(151, 151, 151, 0.6);
+    --button-shadow-colour: rgba(151, 151, 151, 0.5);
 }
 
 .pad-left-md {
