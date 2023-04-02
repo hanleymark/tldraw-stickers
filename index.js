@@ -1,4 +1,5 @@
 import { StampButton } from "./modules/stamp-button.js";
+import { EmojiPicker } from "./modules/emoji-picker.js";
 
 const toolbarContainer = document.querySelector("#toolbar__container");
 const canvas = document.querySelector("#canvas");
@@ -8,6 +9,10 @@ const stampItems = ["🌟", "🔥", "💖", "👍", "👎"];
 setUpStampButtons(stampItems);
 
 setUpDisplayCircleOnMouseClick();
+
+const emojiPicker = new EmojiPicker();
+console.log(emojiPicker.allEmojis);
+
 
 // Create stamp buttons one for each object in stampItems array
 function setUpStampButtons(stampItems) {
