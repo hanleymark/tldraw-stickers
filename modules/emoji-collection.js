@@ -23,12 +23,7 @@ export const emojis = [
     category: "Smileys & Emotion",
   },
   {
-    emoji: "🔥",
-    description: "fire",
-    category: "Travel & Places",
-  },
-  {
-    emoji: "👍",
+    emoji: "😘",
     description: "thumbs up",
     category: "People & Body",
   },
@@ -118,8 +113,9 @@ export const emojis = [
     category: "Smileys & Emotion",
   },
   {
-    emoji: "hugging face",
-    description: "Smileys & Emotion",
+    emoji: "🤗",
+    description: "hugging face",
+    category: "Smileys & Emotion",
   },
   {
     emoji: "🤔",
@@ -242,7 +238,8 @@ export const emojis = [
     category: "Smileys & Emotion",
   },
   {
-    emoji: "face with raised eyebrow",
+    emoji: "🤨",
+    description: "face with raised eyebrow",
     category: "Smileys & Emotion",
   },
   {
