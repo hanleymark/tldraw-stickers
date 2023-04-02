@@ -30,6 +30,7 @@ body {
     background-color: var(--toolbar-bg-color);
     border-top: 1px solid var(--button-border-colour);
     display: flex;
+    flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
     width: 100vw;
@@ -43,6 +44,16 @@ body {
     width: 100vw;
 }
 
+.mouse__circle {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    z-index: 999;
+}
+
 .toolbar__button {
     font-size: 2rem;
     text-shadow: 2px 4px 4px var(--button-shadow-colour);
@@ -54,8 +65,28 @@ body {
     font-size: 1.5rem;
     width: 3rem;
     height: 3rem;
+    user-select: none;
 }
 
 .toolbar__button:hover {
     background-color: var(--button-bg-colour-hover);
+}
+
+.toolbar__button:active {
+    background-color: var(--button-bg-colour-hover);
+}
+
+[class^="stamp__element"] {
+    position: absolute;
+    font-size: 2rem;
+    text-shadow: 2px 4px 4px var(--button-shadow-colour);
+    user-select: none;
+}
+
+/* .stamp__element--moving {
+    z-index: 99;
+} */
+
+.stamp__element--dropped {
+    z-index: auto;
 }
