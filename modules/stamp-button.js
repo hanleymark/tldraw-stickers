@@ -15,7 +15,7 @@ export class StampButton {
     this.element.classList.add(this.style);
     this.element.innerHTML = this.stamp;
     this.element.addEventListener("mousedown", (event) =>
-      this.handleClick(event)
+      this.stampButtonClick(event)
     );
     return this.element;
   };
@@ -28,17 +28,16 @@ export class StampButton {
     stampElement.classList.add("stamp__element--moving");
     stampElement.innerHTML = this.stamp;
     window.addEventListener("mousemove", (event) => this.startDrag(event));
-    window.addEventListener("mouseup", (event) => this.stopDrag(event));
+    this.canvas.addEventListener("mousedown", (event) => this.stopDrag(event));
     return stampElement;
   };
 
   // Get the stamp element and position it at the mouse click coordinates.
-  handleClick = (event) => {
+  stampButtonClick = (event) => {
     const stampElement = this.getStampElement();
-    const stampX = event.clientX - stampElement.offsetWidth / 2;
-    const stampY = event.clientY - stampElement.offsetHeight / 2;
-    stampElement.style.left = `${stampX}px`;
-    stampElement.style.top = `${stampY}px`;
+    const stampPosition = this.getStampPosition(event, stampElement);
+    stampElement.style.left = `${stampPosition.x}px`;
+    stampElement.style.top = `${stampPosition.y}px`;
     this.canvas.appendChild(stampElement);
   };
 
@@ -46,10 +45,9 @@ export class StampButton {
   startDrag = (event) => {
     const stampElement = this.canvas.querySelector(".stamp__element--moving");
     if (stampElement) {
-      const stampX = event.clientX - stampElement.offsetWidth / 2;
-      const stampY = event.clientY - stampElement.offsetHeight / 2;
-      stampElement.style.left = `${stampX}px`;
-      stampElement.style.top = `${stampY}px`;
+      const stampPosition = this.getStampPosition(event, stampElement);
+      stampElement.style.left = `${stampPosition.x}px`;
+      stampElement.style.top = `${stampPosition.y}px`;
     }
   };
 
@@ -60,5 +58,17 @@ export class StampButton {
       stampElement.classList.remove("stamp__element--moving");
       stampElement.classList.add("stamp__element--dropped");
     }
+  };
+
+  // Get stamp x and y relative to mouse position and width/height of stamp element
+  getStampPosition = (mouseEvent, stampElement) => {
+    const stampX = mouseEvent.clientX - stampElement.offsetWidth / 2;
+    const stampY = mouseEvent.clientY - stampElement.offsetHeight / 2;
+
+    // Return object with x and y properties of stamp element
+    return {
+      x: stampX,
+      y: stampY,
+    };
   };
 }
