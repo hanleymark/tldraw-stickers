@@ -66,9 +66,11 @@ export class EmojiPicker {
       for (let emojiObject of this.allEmojis.filter(
         (emoji) => emoji.category === this.categories[category]
       )) {
+        // Create a button element for the current emoji and style it
         const emojiPickerButton = document.createElement("button");
         emojiPickerButton.classList.add("emoji-picker__body--button");
         emojiPickerButton.innerHTML = emojiObject.emoji;
+        // Add the emoji description as a data attribute to the button element
         emojiPickerButton.setAttribute(
           "data-emoji-description",
           emojiObject.description
@@ -81,12 +83,10 @@ export class EmojiPicker {
           "mouseout",
           () => (emojiPickerFooter.innerHTML = "")
         );
-        emojiPickerButton.addEventListener(
-          "mousedown", (event) => {
+        emojiPickerButton.addEventListener("mousedown", (event) => {
           handleEmojiButtonMouseDown(event);
           this.element.remove();
-          }
-        );
+        });
         emojiPickerBodyCategory.appendChild(emojiPickerButton);
       }
 
