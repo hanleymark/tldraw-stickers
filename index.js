@@ -8,7 +8,6 @@ const bodyElement = document.querySelector("body");
 const stampItems = ["🌟", "🔥", "💖", "👍", "👎"];
 
 setUpStampButtons(stampItems);
-setUpAddCustomStampButton();
 
 setUpDisplayCircleOnMouseClick();
 
@@ -24,11 +23,14 @@ function setUpStampButtons(stampItems) {
       canvas
     );
   });
-
+  // Clear toolbar container if already populated
+  toolbarContainer.innerHTML = "";
   // Add each stamp button to toolbar
   stampButtons.forEach((button) => {
     toolbarContainer.appendChild(button.getButtonElement());
   });
+  // Add custom stamp button to end of buttons
+  setUpAddCustomStampButton();
 }
 
 // Display a circle on mouse click
@@ -61,8 +63,7 @@ function setUpAddCustomStampButton() {
   addCustomStampButton.innerText = "+";
 
   addCustomStampButton.addEventListener("mousedown", () => {
-    console.log("Add custom stamp button clicked");
-    bodyElement.appendChild(emojiPicker.getPickerElement());
+    bodyElement.appendChild(emojiPicker.getPickerElement(stampItems, setUpStampButtons));
   },true);
 
   toolbarContainer.appendChild(addCustomStampButton);

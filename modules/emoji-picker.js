@@ -13,7 +13,8 @@ export class EmojiPicker {
     // Create element reference for emoji picker
     this.element;
   }
-  getPickerElement() {
+  // Create (if not already created) and return emoji picker element
+  getPickerElement(stampItemsArray, displayStampButtonsCallback) {
     if (this.element) return this.element;
 
     // Create emoji picker element if not already created
@@ -52,6 +53,10 @@ export class EmojiPicker {
             const emojiPickerButton = document.createElement("button");
             emojiPickerButton.classList.add("emoji-picker__body--button");
             emojiPickerButton.innerHTML = emojiObject.emoji;
+            emojiPickerButton.setAttribute("data-emoji-description", emojiObject.description);
+            emojiPickerButton.addEventListener("mouseover", handleEmojiButtonMouseOver);
+            emojiPickerButton.addEventListener("mouseout", () => emojiPickerFooter.innerHTML = "");
+            emojiPickerButton.addEventListener("mousedown", handleEmojiButtonMouseDown);
             emojiPickerBodyCategory.appendChild(emojiPickerButton);
         }
 
@@ -60,6 +65,19 @@ export class EmojiPicker {
     // Append the emoji picker body element to the emoji picker element
     this.element.appendChild(emojiPickerBody);
 
+    const emojiPickerFooter = document.createElement("div");
+    emojiPickerFooter.classList.add("emoji-picker__footer");
+    this.element.appendChild(emojiPickerFooter);
     return this.element;
+
+    function handleEmojiButtonMouseOver(event) {
+        emojiPickerFooter.innerHTML = "Click to add: ";
+        emojiPickerFooter.innerHTML += event.target.innerHTML + "&nbsp";
+        emojiPickerFooter.innerHTML += event.target.getAttribute("data-emoji-description");
+    }
+    function handleEmojiButtonMouseDown(event) {
+        stampItemsArray.push(event.target.innerHTML);
+        displayStampButtonsCallback(stampItemsArray);
+    }
   }
 }

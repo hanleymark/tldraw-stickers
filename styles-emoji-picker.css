@@ -35,6 +35,8 @@ this.element = document.createElement("div");
     font-weight: 400;
     position: fixed;
     display: flexbox;
+    justify-content: center;
+    align-items: flex-start;
     left: 50vw;
     width: 50vw;
     max-width: 550px;
@@ -55,52 +57,67 @@ this.element = document.createElement("div");
     }
 }
 
-.emoji-picker__header {
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-    width: 100%;
-    height: fit-content;
-    padding-bottom: 1rem;
+@media screen and (max-height: 600px) {
+    .emoji-picker {
+        height: 80vh;
+        transform: translate(-50%, 0);
+    }
 }
 
-.emoji-picker__header-title {
-    font-size: 1.4rem;;
-    font-weight: 500;
-    width: fit-content;
-    flex: 1;
-}
+    .emoji-picker__header {
+        display: flexbox;
+        justify-content: center;
+        align-items: center;
+        font-weight: 500;
+        width: 100%;
+        height: fit-content;
+        padding-bottom: 1rem;
+    }
 
-.emoji-picker__body {
-    display: flexbox;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    background-color: #fff;
-    height: 80%;
-    overflow-y: scroll;
-}
+    .emoji-picker__header-title {
+        font-size: 1.4rem;
+        ;
+        font-weight: 500;
+        width: fit-content;
+        flex: 1;
+    }
 
-.emoji-picker__body--category {
-    padding-top: 0.8rem;
-}
+    .emoji-picker__body {
+        display: flexbox;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        background-color: #fff;
+        height: 80%;
+        overflow-y: scroll;
+    }
 
-.emoji-picker__body--category-title {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1.2rem;;
-    font-weight: 400;
-    padding-bottom: 0.5rem;
-}
+    .emoji-picker__body--category {
+        padding-top: 0.8rem;
+    }
 
-.emoji-picker__body--button {
-    font-size: 1.4rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 20%;
-    background-color: #fff;
-}
+    .emoji-picker__body--category-title {
+        font-family: 'Quicksand', sans-serif;
+        font-size: 1.2rem;
+        ;
+        font-weight: 400;
+        padding-bottom: 0.5rem;
+    }
 
-.emoji-picker__body--button:hover {
-    background-color: #f0f0f0;
-}
+    .emoji-picker__body--button {
+        font-size: 1.4rem;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 20%;
+        background-color: #fff;
+    }
+
+    .emoji-picker__body--button:hover {
+        background-color: #f0f0f0;
+    }
+
+    .emoji-picker__footer {
+        padding-top: 1rem;
+        font-size: 1.2rem;
+        height: fit-content;
+    }
