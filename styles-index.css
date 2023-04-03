@@ -54,26 +54,33 @@ body {
     z-index: 999;
 }
 
-.toolbar__button {
-    font-size: 2rem;
+/* Select and style all toolbar buttons */
+/* //////////////////////////////////// */
+[class^="toolbar__button"] {
+    font-size: 1.5rem;
     text-shadow: 2px 4px 4px var(--button-shadow-colour);
     background-color: var(--button-bg-color);
     border: 1px solid var(--button-border-colour);
     border-radius: 5px;
-    color: #000;
     cursor: pointer;
-    font-size: 1.5rem;
     width: 3rem;
     height: 3rem;
     user-select: none;
 }
 
-.toolbar__button:hover {
+[class^="toolbar__button"]:hover {
     background-color: var(--button-bg-colour-hover);
 }
 
-.toolbar__button:active {
+[class^="toolbar__button"]:active {
     background-color: var(--button-bg-colour-hover);
+}
+/* //////////////////////////////////// */
+
+/* Select and style just the 'add custom stamp' button */
+.toolbar__button--add-custom-stamp {
+    color: #333;
+    opacity: 0.5;
 }
 
 [class^="stamp__element"] {

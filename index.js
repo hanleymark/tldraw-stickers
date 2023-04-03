@@ -1,13 +1,17 @@
 import { StampButton } from "./modules/stamp-button.js";
+import { EmojiPicker } from "./modules/emoji-picker.js";
 
 const toolbarContainer = document.querySelector("#toolbar__container");
 const canvas = document.querySelector("#canvas");
+const bodyElement = document.querySelector("body");
 
 const stampItems = ["🌟", "🔥", "💖", "👍", "👎"];
 
 setUpStampButtons(stampItems);
 
 setUpDisplayCircleOnMouseClick();
+
+const emojiPicker = new EmojiPicker();
 
 // Create stamp buttons one for each object in stampItems array
 function setUpStampButtons(stampItems) {
@@ -19,11 +23,14 @@ function setUpStampButtons(stampItems) {
       canvas
     );
   });
-
+  // Clear toolbar container if already populated
+  toolbarContainer.innerHTML = "";
   // Add each stamp button to toolbar
   stampButtons.forEach((button) => {
     toolbarContainer.appendChild(button.getButtonElement());
   });
+  // Add custom stamp button to end of buttons
+  setUpAddCustomStampButton();
 }
 
 // Display a circle on mouse click
@@ -46,4 +53,29 @@ function setUpDisplayCircleOnMouseClick() {
       mouseCircle.remove();
     }
   });
+}
+
+// Add custom stamp button
+function setUpAddCustomStampButton() {
+  // Set up add custom stamp button
+  const addCustomStampButton = document.createElement("button");
+  addCustomStampButton.id = "add-custom-stamp-button";
+  addCustomStampButton.classList.add("toolbar__button--add-custom-stamp");
+  addCustomStampButton.innerText = "+";
+
+  // Add mousedown event listener to add custom stamp button
+  addCustomStampButton.addEventListener("mousedown", () => {
+    // If stamp being dragged exists, remove it
+    if(document.querySelector(".stamp__element--moving")) {
+      document.querySelector(".stamp__element--moving").remove();
+    }
+    // If circle on click exists, remove it
+    if (document.querySelector(".mouse__circle")) {
+      document.querySelector(".mouse__circle").remove();
+    }
+    // Get emoji picker element and append to body
+    bodyElement.appendChild(emojiPicker.getPickerElement(stampItems, setUpStampButtons));
+  },true);
+  // Add custom emoji button to toolbar
+  toolbarContainer.appendChild(addCustomStampButton);
 }
