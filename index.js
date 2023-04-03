@@ -57,14 +57,25 @@ function setUpDisplayCircleOnMouseClick() {
 
 // Add custom stamp button
 function setUpAddCustomStampButton() {
+  // Set up add custom stamp button
   const addCustomStampButton = document.createElement("button");
   addCustomStampButton.id = "add-custom-stamp-button";
   addCustomStampButton.classList.add("toolbar__button--add-custom-stamp");
   addCustomStampButton.innerText = "+";
 
+  // Add mousedown event listener to add custom stamp button
   addCustomStampButton.addEventListener("mousedown", () => {
+    // If stamp being dragged exists, remove it
+    if(document.querySelector(".stamp__element--moving")) {
+      document.querySelector(".stamp__element--moving").remove();
+    }
+    // If circle on click exists, remove it
+    if (document.querySelector(".mouse__circle")) {
+      document.querySelector(".mouse__circle").remove();
+    }
+    // Get emoji picker element and append to body
     bodyElement.appendChild(emojiPicker.getPickerElement(stampItems, setUpStampButtons));
   },true);
-
+  // Add custom emoji button to toolbar
   toolbarContainer.appendChild(addCustomStampButton);
 }

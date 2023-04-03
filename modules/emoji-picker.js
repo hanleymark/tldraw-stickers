@@ -20,7 +20,7 @@ export class EmojiPicker {
     // Create emoji picker element if not already created
     this.element = document.createElement("div");
     this.element.classList.add("emoji-picker");
-    
+
     // Create emoji picker header element and add to emoji picker element
     const emojiPickerHeader = document.createElement("div");
     emojiPickerHeader.classList.add("emoji-picker__header");
@@ -29,8 +29,20 @@ export class EmojiPicker {
     // Create emoji picker header title element, add a heading and add to emoji picker header element
     const emojiPickerHeaderTitle = document.createElement("h2");
     emojiPickerHeaderTitle.classList.add("emoji-picker__header-title");
-    emojiPickerHeaderTitle.innerText = "Add custom emoji button";
+    emojiPickerHeaderTitle.innerText = "Add custom emoji";
     emojiPickerHeader.appendChild(emojiPickerHeaderTitle);
+
+    // Create emoji picker header close button element, add a button and add to emoji picker header element
+    const emojiPickerHeaderCloseButton = document.createElement("button");
+    emojiPickerHeaderCloseButton.classList.add(
+      "emoji-picker__header-close-button"
+    );
+    emojiPickerHeaderCloseButton.innerHTML = "&#x2715"; // 'x' character
+    // Add event listener to close button to remove emoji picker element from DOM when close button is clicked
+    emojiPickerHeaderCloseButton.addEventListener("mousedown", () => {
+      this.element.remove();
+    });
+    emojiPickerHeader.appendChild(emojiPickerHeaderCloseButton);
 
     // Create emoji picker body element
     const emojiPickerBody = document.createElement("div");
@@ -38,29 +50,47 @@ export class EmojiPicker {
 
     // Iterate through emoji categories
     for (let category in this.categories) {
-        // Create a section element for the current category
-        const emojiPickerBodyCategory = document.createElement("section");
-        // Create a heading element for the current category and set its text to the current category
-        const emojiPickerBodyCategoryTitle = document.createElement("h3");
-        emojiPickerBodyCategoryTitle.classList.add("emoji-picker__body--category-title");
-        emojiPickerBodyCategoryTitle.innerText = this.categories[category];
-        // Append the heading element to the category section element
-        emojiPickerBodyCategory.appendChild(emojiPickerBodyCategoryTitle);
-        emojiPickerBodyCategory.classList.add("emoji-picker__body--category");
+      // Create a section element for the current category
+      const emojiPickerBodyCategory = document.createElement("section");
+      // Create a heading element for the current category and set its text to the current category
+      const emojiPickerBodyCategoryTitle = document.createElement("h3");
+      emojiPickerBodyCategoryTitle.classList.add(
+        "emoji-picker__body--category-title"
+      );
+      emojiPickerBodyCategoryTitle.innerText = this.categories[category];
+      // Append the heading element to the category section element
+      emojiPickerBodyCategory.appendChild(emojiPickerBodyCategoryTitle);
+      emojiPickerBodyCategory.classList.add("emoji-picker__body--category");
 
-        // Iterate through all emojis in the current category then create and add a button for each
-        for (let emojiObject of this.allEmojis.filter(emoji => emoji.category === this.categories[category])) {
-            const emojiPickerButton = document.createElement("button");
-            emojiPickerButton.classList.add("emoji-picker__body--button");
-            emojiPickerButton.innerHTML = emojiObject.emoji;
-            emojiPickerButton.setAttribute("data-emoji-description", emojiObject.description);
-            emojiPickerButton.addEventListener("mouseover", handleEmojiButtonMouseOver);
-            emojiPickerButton.addEventListener("mouseout", () => emojiPickerFooter.innerHTML = "");
-            emojiPickerButton.addEventListener("mousedown", handleEmojiButtonMouseDown);
-            emojiPickerBodyCategory.appendChild(emojiPickerButton);
-        }
+      // Iterate through all emojis in the current category then create and add a button for each
+      for (let emojiObject of this.allEmojis.filter(
+        (emoji) => emoji.category === this.categories[category]
+      )) {
+        const emojiPickerButton = document.createElement("button");
+        emojiPickerButton.classList.add("emoji-picker__body--button");
+        emojiPickerButton.innerHTML = emojiObject.emoji;
+        emojiPickerButton.setAttribute(
+          "data-emoji-description",
+          emojiObject.description
+        );
+        emojiPickerButton.addEventListener(
+          "mouseover",
+          handleEmojiButtonMouseOver
+        );
+        emojiPickerButton.addEventListener(
+          "mouseout",
+          () => (emojiPickerFooter.innerHTML = "")
+        );
+        emojiPickerButton.addEventListener(
+          "mousedown", (event) => {
+          handleEmojiButtonMouseDown(event);
+          this.element.remove();
+          }
+        );
+        emojiPickerBodyCategory.appendChild(emojiPickerButton);
+      }
 
-        emojiPickerBody.appendChild(emojiPickerBodyCategory);
+      emojiPickerBody.appendChild(emojiPickerBodyCategory);
     }
     // Append the emoji picker body element to the emoji picker element
     this.element.appendChild(emojiPickerBody);
@@ -70,14 +100,17 @@ export class EmojiPicker {
     this.element.appendChild(emojiPickerFooter);
     return this.element;
 
+    // If user mouses over an emoji button, display the emoji and its description in the footer
     function handleEmojiButtonMouseOver(event) {
-        emojiPickerFooter.innerHTML = "Click to add: ";
-        emojiPickerFooter.innerHTML += event.target.innerHTML + "&nbsp";
-        emojiPickerFooter.innerHTML += event.target.getAttribute("data-emoji-description");
+      const selectedEmojiText = `Click to add: ${
+        event.target.innerHTML
+      } ${event.target.getAttribute("data-emoji-description")}`;
+      emojiPickerFooter.innerHTML = selectedEmojiText;
     }
+    // If user clicks an emoji button, add the emoji to the stampItemsArray and call the displayStampButtonsCallback function
     function handleEmojiButtonMouseDown(event) {
-        stampItemsArray.push(event.target.innerHTML);
-        displayStampButtonsCallback(stampItemsArray);
+      stampItemsArray.push(event.target.innerHTML);
+      displayStampButtonsCallback(stampItemsArray);
     }
   }
 }

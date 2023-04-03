@@ -65,8 +65,8 @@ this.element = document.createElement("div");
 }
 
     .emoji-picker__header {
-        display: flexbox;
-        justify-content: center;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
         font-weight: 500;
         width: 100%;
@@ -76,19 +76,28 @@ this.element = document.createElement("div");
 
     .emoji-picker__header-title {
         font-size: 1.4rem;
-        ;
+        display: inline-block;
         font-weight: 500;
         width: fit-content;
-        flex: 1;
+    }
+
+    .emoji-picker__header-close-button {
+        display: inline-block;
+        font-size: 1.4rem;
+        width: fit-content;
+        height: fit-content;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    .emoji-picker__header-close-button:hover {
+        background-color: #f0f0f0;
     }
 
     .emoji-picker__body {
-        display: flexbox;
-        flex-wrap: wrap;
-        justify-content: center;
         width: 100%;
         background-color: #fff;
-        height: 80%;
+        height: 78%;
         overflow-y: scroll;
     }
 
@@ -114,6 +123,7 @@ this.element = document.createElement("div");
 
     .emoji-picker__body--button:hover {
         background-color: #f0f0f0;
+        cursor: pointer;
     }
 
     .emoji-picker__footer {
