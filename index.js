@@ -63,7 +63,7 @@ function setUpAddCustomStampButton() {
   addCustomStampButton.addEventListener("mousedown", () => {
     console.log("Add custom stamp button clicked");
     bodyElement.appendChild(emojiPicker.getPickerElement());
-  });
+  },true);
 
   toolbarContainer.appendChild(addCustomStampButton);
 }
