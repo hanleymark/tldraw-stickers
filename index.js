@@ -27,8 +27,6 @@ function setUpStampButtons(stampItems) {
   toolbarContainer.innerHTML = "";
   // Add each stamp button to toolbar
   stampButtons.forEach((button) => {
-    window.removeEventListener("mousemove", button.startDrag);
-    canvas.removeEventListener("mousedown", button.stopDrag);
     toolbarContainer.appendChild(button.getButtonElement());
   });
   // Add custom stamp button to end of buttons
